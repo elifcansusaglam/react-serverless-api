@@ -7,18 +7,18 @@ const Product = () => {
   const [product, setProduct] = useState(null)
   const { productID } = useParams()
 
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
     try {
       const { data } = await axios.get(`/api/products?id=${productID}`)
       setProduct(data)
     } catch (error) {}
     setLoading(false)
   }
+
+  useEffect(() => {
+    
     fetchData()
-  }, [productID])
+  }, [])
 
   if (loading) {
     return (
@@ -28,7 +28,7 @@ const Product = () => {
     )
   }
   const { fields } = product
-  const { name, description, price, images } = fields
+  const { id,name,stock,price,featured,shipping,colors,category,images,description } = fields
 
   return (
     <section className='section section-center'>
